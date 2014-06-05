@@ -21,6 +21,16 @@ class jsx_block(literal_block):
     pass
 
 
+class TransformError(Exception):
+
+    def __init__(self, message, source):
+        Exception.__init__(self, message)
+        self.source = source
+
+    def __str__(self):
+        return self.message + '\n' + self.source
+
+
 class JSXInjector(object):
     """
     JSXInjector traverses the doctree and replaces all jsx_block node with
@@ -36,26 +46,31 @@ class JSXInjector(object):
     </script>
     """
 
+    PREFIX = '/** @jsx React.DOM */'
+
     def __call__(self, app, doctree, docname):
-        js = []
+        script = []
 
         for block in doctree.traverse(jsx_block):
-            jsx = block.rawsource
+            source = block.rawsource
 
             if not block.attributes['hidesource']:
-                replacement = literal_block(jsx, jsx)
+                replacement = literal_block(source, source)
                 block.replace_self(replacement)
             else:
                 block.parent.remove(block)
 
             if not block.attributes['showsourceonly']:
-                js.append(jsx)
+                try:
+                    js = jsx_transformer.transform_string(
+                        self.PREFIX + source)[len(self.PREFIX):]
+                    script.append(js)
+                except jsx.TransformError as e:
+                    raise TransformError(e.message, source)
 
-        if js:
-            js = '\n'.join(js)
-            js = jsx_transformer.transform_string('/** @jsx React.DOM */' + js)
-            js = self.SCRIPT_TEMPLATE % js
-            node = raw('', js, format='html')
+        if script:
+            script = self.SCRIPT_TEMPLATE % '\n'.join(script)
+            node = raw('', script, format='html')
             doctree.children.append(node)
 
 
