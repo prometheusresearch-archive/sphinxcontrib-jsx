@@ -44,8 +44,9 @@ class JSXInjector(object):
 
             if not block.attributes['hidesource']:
                 replacement = literal_block(jsx, jsx)
-                replacement['language'] = 'javascript'
                 block.replace_self(replacement)
+            else:
+                block.parent.remove(block)
 
             if not block.attributes['showsourceonly']:
                 js.append(jsx)
@@ -71,9 +72,11 @@ class JSXDirective(Directive):
 
     def run(self):
         text = '\n'.join(self.content)
-        return [jsx_block(text, text,
+        node = jsx_block(text, text,
             hidesource='hidesource' in self.options,
-            showsourceonly='showsourceonly' in self.options)]
+            showsourceonly='showsourceonly' in self.options,
+        )
+        return [node]
 
 
 def setup(app):
