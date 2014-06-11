@@ -8,8 +8,8 @@ into page
 '''
 
 requires = [
-    'Sphinx>=1.0',
-    'PyReact>=0.3.0'
+    'Sphinx>=1.2',
+    'PyReact>=0.3.1'
 ]
 
 setup(
