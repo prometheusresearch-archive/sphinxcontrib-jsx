@@ -1,10 +1,9 @@
 from setuptools import setup, find_packages
 
 long_desc = '''
-This package contains the jsx_directive Sphinx extension.
+This package contains the ``jsx`` Sphinx extension.
 
-jsx_directive adds a directive named ``jsx`` which supports injecting JSX code
-into page
+Adds a directive named ``jsx`` which supports injecting JSX code into page.
 '''
 
 requires = [
@@ -14,8 +13,8 @@ requires = [
 
 setup(
     name='sphinxcontrib-jsx',
-    version='',
-    license='AGPLv3',
+    version='0.1.0',
+    license='BSD',
     author='Prometheus Research, LLC',
     description='Sphinx JSX directive extension',
     long_description=long_desc,
