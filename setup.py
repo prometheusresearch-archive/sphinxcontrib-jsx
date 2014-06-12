@@ -14,6 +14,7 @@ requires = [
 setup(
     name='sphinxcontrib-jsx',
     version='0.1.0',
+    url='https://github.com/prometheusresearch/sphinxcontrib-jsx',
     license='BSD',
     author='Prometheus Research, LLC',
     description='Sphinx JSX directive extension',
