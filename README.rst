@@ -8,7 +8,7 @@ Installation
 
 ::
 
-  % pip install sphinxcontrib.jsx
+  % pip install sphinxcontrib-jsx
 
 Usage
 -----
