@@ -8,12 +8,12 @@ Adds a directive named ``jsx`` which supports injecting JSX code into page.
 
 requires = [
     'Sphinx>=1.2',
-    'PyReact>=0.3.1'
+    'PyReact>=0.4.0'
 ]
 
 setup(
     name='sphinxcontrib-jsx',
-    version='0.1.0',
+    version='0.2.0',
     url='https://github.com/prometheusresearch/sphinxcontrib-jsx',
     license='BSD',
     author='Prometheus Research, LLC',
