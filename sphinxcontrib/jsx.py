@@ -62,8 +62,12 @@ class JSXInjector(object):
 
             if not block.attributes['showsourceonly']:
                 try:
+                    opts = {
+                        'strip_types': block.attributes['striptypes'],
+                        'harmony': block.attributes['harmony'],
+                    }
                     js = jsx_transformer.transform_string(
-                        self.PREFIX + source)[len(self.PREFIX):]
+                        self.PREFIX + source, **opts)[len(self.PREFIX):]
                     script.append(js)
                 except jsx.TransformError as e:
                     raise TransformError(e.message, source)
@@ -83,6 +87,8 @@ class JSXDirective(Directive):
     option_spec = {
         'hidesource': directives.flag,
         'showsourceonly': directives.flag,
+        'harmony': directives.flag,
+        'striptypes': directives.flag,
     }
 
     def run(self):
@@ -90,6 +96,8 @@ class JSXDirective(Directive):
         node = jsx_block(text, text,
             hidesource='hidesource' in self.options,
             showsourceonly='showsourceonly' in self.options,
+            harmony='harmony' in self.options,
+            striptypes='striptypes' in self.options,
         )
         return [node]
 

@@ -8,7 +8,8 @@ Adds a directive named ``jsx`` which supports injecting JSX code into page.
 
 requires = [
     'Sphinx>=1.2',
-    'PyReact>=0.4.0'
+    'PyExecJS==1.0.4',
+    'PyReact>=0.5.1'
 ]
 
 setup(
