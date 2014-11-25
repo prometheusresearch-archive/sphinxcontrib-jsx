@@ -44,6 +44,22 @@ Alternatively if you only want to show source and not execute script, use
 
     var x = <div>Hello!</div>
 
+To activate ES6 transforms use ``harmony`` option::
+
+  .. jsx::
+    :harmony:
+
+    <ul>
+      {children.map(item => <li>{item}</li>)}
+    </ul>
+
+To strip type declarations from source code use ``striptypes`` option::
+
+  .. jsx::
+    :striptypes:
+
+    var x: Number = 1
+
 .. _JSX: http://facebook.github.io/react/docs/jsx-in-depth.html
 .. _Sphinx: http://sphinx-doc.org/
 .. _React: http://facebook.github.io/react/
